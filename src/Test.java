@@ -25,12 +25,19 @@ public class Test {
 
             Book testBook = new Book(input3, input4);
 
-            if(!testBook.equals(books[i--])){
-                books[i] = new Book(input3, input4);
-                System.out.println("Książka " + books[i].getTitle() + " została dodana");
+            boolean isDuplicate = false;
+            for (int j = 0; j < books.length ; j++) {
+                if(testBook.equals(books[j])){
+                    System.out.println("Duplikat. Ponów próbę dodania");
+                    isDuplicate = true;
+                    break;
+                }
+            }
+
+            if(!isDuplicate){
+                books[i] = testBook;
+                System.out.println("Książka " + books[i].getTitle() + " została dodana.");
                 i++;
-            } else {
-                System.out.println("Duplikat. Ponów próbę dodania");
             }
         }
 
