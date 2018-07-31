@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Test {
@@ -7,39 +8,25 @@ public class Test {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Podaj tytuł książki: ");
-        String input1 = scan.nextLine();
-        System.out.println("Podaj liczbę stron: ");
-        int input2 = scan.nextInt();
-        scan.nextLine();
-        books[0] = new Book(input1, input2);
-        System.out.println("Książka " + books[0].getTitle() + " została dodana.");
-
-        int i = 1;
-        while (i < books.length){
+        for (int i = 0; i < books.length; i++) {
             System.out.println("Podaj tytuł książki: ");
-            String input3 = scan.nextLine();
+            String input1 = scan.nextLine();
             System.out.println("Podaj liczbę stron: ");
-            int input4 = scan.nextInt();
+            int input2 = scan.nextInt();
             scan.nextLine();
 
-            Book testBook = new Book(input3, input4);
+            Book testBook = new Book(input1, input2);
 
-            boolean isDuplicate = false;
-            for (int j = 0; j < books.length ; j++) {
-                if(testBook.equals(books[j])){
-                    System.out.println("Duplikat. Ponów próbę dodania");
-                    isDuplicate = true;
-                    break;
-                }
-            }
-
-            if(!isDuplicate){
+            if (!Book.contains(testBook, books)) {
                 books[i] = testBook;
-                System.out.println("Książka " + books[i].getTitle() + " została dodana.");
-                i++;
+            } else {
+                System.out.println("Duplikat. Ponów próbę dodania");
+                i--;
             }
         }
+
+        String description = Arrays.toString(books);
+        System.out.println(description);
 
     }
 }
